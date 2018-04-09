@@ -3,7 +3,7 @@
 default: run
 
 build:
-	docker-compose build peatio barong
+	docker-compose build peatio barong peatio-trading-ui
 
 prepare:
 	docker-compose up -d vault db redis rabbitmq smtp_relay coinhub peatio_daemons
@@ -14,7 +14,7 @@ setup-apps: build
 	docker-compose run --rm barong "./bin/setup"
 
 run: prepare setup-apps
-	docker-compose up peatio barong
+	docker-compose up peatio barong peatio-trading-ui nginx
 
 test: prepare
 	@docker-compose run --rm peatio_specs
